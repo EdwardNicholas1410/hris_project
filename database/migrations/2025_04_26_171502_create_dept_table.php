@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('dept', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->integer('count')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

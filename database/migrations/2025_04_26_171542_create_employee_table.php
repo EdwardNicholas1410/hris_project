@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->integer('no_telp');
             $table->string('alamat');
-            $table->foreignId('id_dept')->constrained('dept');
             $table->integer('gaji_bulan');
+            $table->enum('type', ['permanent', 'contract']);
+            $table->enum('status',['active', 'terminated']);
+            $table->foreignId('id_dept')->constrained('dept');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

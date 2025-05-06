@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>HR</b>IS',
+    'logo_img' => 'img/hrislogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -313,31 +313,66 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Home',
+            'route' => 'home',
+            'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Department',
+            'route' => 'dept.index',
+            'icon' => 'fas fa-fw fa-sitemap',
+            'active' => ['dept*'],
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Employee',
+            'route' => 'employee.index',
+            'icon' => 'fas fa-fw fa-id-card',
+            'active' => ['employee*'],
         ],
+        [
+            'text' => 'Attendance',
+            // 'route' => 'attendance.index',
+            'icon' => 'fas fa-fw fa-calendar-check',
+            'active' => ['attendance*'],
+        ],
+        [
+            'text' => 'Leave Request',
+            // 'route' => 'leave_request.index',
+            'icon' => 'fas fa-fw fa-calendar-minus',
+            'active' => ['leave_request*'],
+        ],
+        [
+            'text' => 'Payroll',
+            // 'route' => 'payroll.index',
+            'icon' => 'fas fa-money-check-alt',
+            'active' => ['payroll*'],
+        ],
+        // [
+        //     'text' => 'blog',
+        //     'url' => 'admin/blog',
+        //     'can' => 'manage-blog',
+        // ],
+        // [
+        //     'text' => 'pages',
+        //     'url' => 'home',
+        //     'icon' => 'far fa-fw fa-file',
+        //     'label' => 4,
+        //     'label_color' => 'success',
+        // ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
