@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('employee', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
-            $table->integer('no_telp');
+            $table->string('no_telp');
             $table->string('alamat');
             $table->integer('gaji_bulan');
             $table->enum('type', ['permanent', 'contract']);
-            $table->enum('status',['active', 'terminated']);
             $table->foreignId('id_dept')->constrained('dept');
             $table->timestamps();
             $table->softDeletes();

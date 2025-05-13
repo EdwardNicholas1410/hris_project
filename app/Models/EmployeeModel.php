@@ -26,7 +26,7 @@ class EmployeeModel extends Model
     // ensures correct data types
     protected $casts = [
         'nama_lengkap' => 'string',
-        'no_telp' => 'integer',
+        'no_telp' => 'string',
         'alamat' => 'string',
         'gaji_bulan' => 'integer',
         'type' => 'string',
@@ -36,6 +36,8 @@ class EmployeeModel extends Model
 
     public function department()
     {
-        return $this->belongsTo(DeptModel::class, 'id_dept');  // Using DeptModel as the related model
+        return $this->belongsTo(DeptModel::class, 'id_dept')->withTrashed();  // Using DeptModel as the related model, withTrashed so deleted departments still show
     }
+
+    // does not have method for user since it's user->employee, not the other way around
 }

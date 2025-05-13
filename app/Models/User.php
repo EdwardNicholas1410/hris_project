@@ -18,10 +18,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'id_employee',
     ];
 
     /**
@@ -43,4 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(EmployeeModel::class, 'id_employee')->withTrashed();  // Using EmployeeModel as the related model, withTrashed so deleted departments still show
+    }
 }

@@ -7,11 +7,16 @@
 @section('plugins.DatatablesPlugins', true)
 
 @section('content_header')
-    <h1>Sample Data Table</h1>
+    <h1>Employee Data Table</h1>
 @stop
 
 @section('content')
 <div class="container-fluid">
+    <div class="mt-2">
+        <a href="{{ route('employee.create') }}" class="btn btn-info mb-3">
+            <i class="fas fa-plus"></i> New Entry
+        </a>
+    </div>
     <div class="card">
         <div class="card-body">
             {{-- Use AdminLTE datatable component --}}
@@ -24,8 +29,7 @@
                                     'Address', 
                                     'Monthly Wage', 
                                     'Type',
-                                    'Status',
-                                    'Department ID',
+                                    'Department',
                                     ['label'=>'Actions','no-export'=>true, 'width'=>10,]
                                     ]"
                                 :config="[ 'processing' => true, 'serverSide' => true, 'ajax' => route('employee.data'),
@@ -36,7 +40,6 @@
                                               ['data'=>'alamat','name'=>'alamat'],
                                               ['data'=>'gaji_bulan','name'=>'gaji_bulan'],
                                               ['data'=>'type','name'=>'type'],
-                                              ['data'=>'status','name'=>'status'],
                                               ['data'=>'id_dept','name'=>'id_dept'],
                                               ['data'=>'actions','name'=>'actions','orderable'=>false,'searchable'=>false]
                                             ],

@@ -19,4 +19,9 @@ class DeptModel extends Model
         'nama' => 'string',
         'count' => 'integer',
     ];
+
+    public function employees()
+    {
+        return $this->hasMany(EmployeeModel::class, 'id_dept');
+    }
 }

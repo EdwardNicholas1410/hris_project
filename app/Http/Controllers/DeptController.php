@@ -14,7 +14,7 @@ class DeptController extends Controller
      */
     public function index()
     {
-        return view('restricted/dept/index');
+        return view('restricted.dept.index');
     }
 
     /**
@@ -55,7 +55,7 @@ class DeptController extends Controller
             'nama' => 'required|max:255'
         ]);
 
-        // kolom count tidak perlu di isi karena di file migration sudah di set default
+        // count column doesn't need to be set because the default is defined in migration file
 
         DeptModel::create($validateData);
         
@@ -75,7 +75,9 @@ class DeptController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $edit = DeptModel::findOrFail($id);
+
+        return view('restricted.dept.edit', compact('edit'));
     }
 
     /**
@@ -83,7 +85,16 @@ class DeptController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // server validation
+        $validateData = $request->validate([
+            'nama' => 'required|max:255'
+        ]);
+
+        // find the correct entry
+        $item = DeptModel::findOrFail($id);
+        $item->update($validateData);
+
+        return redirect()->route('dept.index')->with('success', 'Data telah diubah');
     }
 
     /**
@@ -91,6 +102,9 @@ class DeptController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = DeptModel::findOrFail($id);
+        $delete->delete();
+
+        return view('restricted.dept.index')->with('status', 'Data telah dihapus');
     }
 }

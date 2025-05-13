@@ -30,7 +30,6 @@ class RootUserSeeder extends Seeder
             'alamat' => 'Placeholder Address',
             'gaji_bulan' => 1000000,
             'type' => 'permanent',
-            'status' => 'active',
             'id_dept' => $deptId,
             'created_at' => now(),
             'updated_at' => now(),
