@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->enum('role', ['employee', 'HR', 'admin'])->default('employee');
-            $table->foreignId('id_employee')->nullable()->constrained('employee');
+            $table->foreignId('id_employee')->unique()->constrained('employee');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

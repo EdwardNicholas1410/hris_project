@@ -321,18 +321,6 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'Department',
-            'route' => 'dept.index',
-            'icon' => 'fas fa-fw fa-sitemap',
-            'active' => ['dept*'],
-        ],
-        [
-            'text' => 'Employee',
-            'route' => 'employee.index',
-            'icon' => 'fas fa-fw fa-id-card',
-            'active' => ['employee*'],
-        ],
-        [
             'text' => 'Attendance',
             // 'route' => 'attendance.index',
             'icon' => 'fas fa-fw fa-calendar-check',
@@ -374,41 +362,55 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Restricted',
+            'icon' => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Department',
+                    'route' => 'dept.index',
+                    'icon' => 'fas fa-fw fa-sitemap',
+                    'active' => ['dept*'],
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Employee',
+                    'route' => 'employee.index',
+                    'icon' => 'fas fa-fw fa-id-card',
+                    'active' => ['employee*'],
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'User',
+                    'route' => 'user.index',
+                    'icon' => 'fas fa-fw fa-users',
+                    'active' => ['user*'],
                 ],
+                // [
+                //     'text' => 'level_one',
+                //     'url' => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //         ],
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url' => '#',
+                // ],
             ],
         ],
         ['header' => 'labels'],

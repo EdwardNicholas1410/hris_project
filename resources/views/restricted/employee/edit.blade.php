@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create New Employee')
+@section('title', 'Edit A Employee')
 
 @section('content_header')
     <h1>New Employee Form</h1>

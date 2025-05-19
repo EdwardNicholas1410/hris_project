@@ -1,19 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Employees Table')
+@section('title', 'Users Table')
 
 {{-- Enable AdminLTE DataTables plugin and its extensions --}}
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugins', true)
 
 @section('content_header')
-    <h1>Employee Data Table</h1>
+    <h1>User Data Table</h1>
 @stop
 
 @section('content')
 <div class="container-fluid">
     <div class="mt-2">
-        <a href="{{ route('employee.create') }}" class="btn btn-info mb-3">
+        <a href="{{ route('user.create') }}" class="btn btn-info mb-3">
             <i class="fas fa-plus"></i> New Entry
         </a>
     </div>
@@ -25,22 +25,18 @@
                                 :heads="[
                                     'ID', 
                                     'Name', 
-                                    'Phone Number', 
-                                    'Address', 
-                                    'Monthly Wage', 
-                                    'Type',
-                                    'Department',
+                                    'Email', 
+                                    'Role', 
+                                    'Employee Name', 
                                     ['label'=>'Actions','no-export'=>true, 'width'=>10,]
                                     ]"
-                                :config="[ 'processing' => true, 'serverSide' => true, 'ajax' => route('employee.data'),
+                                :config="[ 'processing' => true, 'serverSide' => true, 'ajax' => route('user.data'),
                                             'columns' => [
                                               ['data'=>'id','name'=>'id'],
-                                              ['data'=>'nama_lengkap','name'=>'nama_lengkap'],
-                                              ['data'=>'no_telp','name'=>'no_telp'],
-                                              ['data'=>'alamat','name'=>'alamat'],
-                                              ['data'=>'gaji_bulan','name'=>'gaji_bulan'],
-                                              ['data'=>'type','name'=>'type'],
-                                              ['data'=>'id_dept','name'=>'id_dept'],
+                                              ['data'=>'name','name'=>'name'],
+                                              ['data'=>'email','name'=>'email'],
+                                              ['data'=>'role','name'=>'role'],
+                                              ['data'=>'id_employee','name'=>'id_employee'],
                                               ['data'=>'actions','name'=>'actions','orderable'=>false,'searchable'=>false]
                                             ],
                                             'responsive'=>true,

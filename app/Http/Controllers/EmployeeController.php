@@ -8,7 +8,6 @@ use App\Models\EmployeeModel;
 use Yajra\DataTables\Facades\DataTables;
 
 use App\Models\DeptModel;
-use function PHPUnit\Framework\returnArgument;
 
 class EmployeeController extends Controller
 {
@@ -66,7 +65,7 @@ class EmployeeController extends Controller
             'alamat' => 'required|max:255',
             'gaji_bulan' => 'required|max:12',
             'type' => 'required|in:permanent,contract',
-            'id_dept' => 'required|exists:dept,id'
+            'id_dept' => 'required|exists:dept,id',
         ]);
 
         EmployeeModel::create($validateData);
@@ -120,6 +119,9 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = EmployeeModel::findOrFail($id);
+        $delete->delete();
+
+        return redirect()->route('employee.index')->with('status', 'Data telah dihapus');
     }
 }

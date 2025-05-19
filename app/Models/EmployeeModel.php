@@ -39,5 +39,8 @@ class EmployeeModel extends Model
         return $this->belongsTo(DeptModel::class, 'id_dept')->withTrashed();  // Using DeptModel as the related model, withTrashed so deleted departments still show
     }
 
-    // does not have method for user since it's user->employee, not the other way around
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_employee');
+    }
 }

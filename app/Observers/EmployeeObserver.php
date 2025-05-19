@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\EmployeeModel;
+use App\Models\DeptModel;
+
 
 class EmployeeObserver
 {
@@ -11,7 +13,9 @@ class EmployeeObserver
      */
     public function created(EmployeeModel $employeeModel): void
     {
-        //
+        // increase the count of assigned dept
+        DeptModel::where('id', $employeeModel->id_dept)
+        ->increment('count');
     }
 
     /**
@@ -19,7 +23,13 @@ class EmployeeObserver
      */
     public function updated(EmployeeModel $employeeModel): void
     {
-        //
+        // sync any changes
+        if ($employeeModel->isDirty('id_dept')) {
+        DeptModel::where('id', $employeeModel->getOriginal('id_dept'))
+            ->decrement('count');
+        DeptModel::where('id', $employeeModel->id_dept)
+            ->increment('count');
+    }
     }
 
     /**
@@ -27,7 +37,14 @@ class EmployeeObserver
      */
     public function deleted(EmployeeModel $employeeModel): void
     {
-        //
+        // decrement a dept count when employee deleted
+        DeptModel::where('id', $employeeModel->id_dept)
+        ->decrement('count');
+
+        // delete the related user
+        if ($employeeModel->user) {
+            $employeeModel->user->delete();
+        }
     }
 
     /**
@@ -35,7 +52,9 @@ class EmployeeObserver
      */
     public function restored(EmployeeModel $employeeModel): void
     {
-        //
+        if ($employeeModel->user()->withTrashed()->exists()) {
+            $employeeModel->user()->withTrashed()->restore();
+        }
     }
 
     /**

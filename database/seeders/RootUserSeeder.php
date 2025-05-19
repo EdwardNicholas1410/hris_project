@@ -40,12 +40,12 @@ class RootUserSeeder extends Seeder
             'name' => 'RootUser',
             'email' => 'root@example.com',
             'password' => Hash::make('password'),
-            'email_verified_at' => now(),
+            'email_verified_at' => null,
             'role' => 'admin',
             'id_employee' => $employeeId,
-            'remember_token' => Str::random(10),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'remember_token' => null,
+            'created_at' => null,
+            'updated_at' => null,
         ]);
     }
 }

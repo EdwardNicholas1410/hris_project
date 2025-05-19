@@ -105,6 +105,6 @@ class DeptController extends Controller
         $delete = DeptModel::findOrFail($id);
         $delete->delete();
 
-        return view('restricted.dept.index')->with('status', 'Data telah dihapus');
+        return redirect()->route('dept.index')->with('status', 'Data telah dihapus');
     }
 }

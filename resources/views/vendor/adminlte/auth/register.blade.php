@@ -16,6 +16,15 @@
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
 @section('auth_body')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <form action="{{ $registerUrl }}" method="post">
         @csrf
 
@@ -62,6 +71,14 @@
             <input type="password" name="password_confirmation"
                    class="form-control"
                    placeholder="{{ __('adminlte::adminlte.retype_password') }}"
+                   required>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="text" name="id_employee"
+                   class="form-control"
+                   placeholder="Employee ID"
                    required>
         </div>
 
