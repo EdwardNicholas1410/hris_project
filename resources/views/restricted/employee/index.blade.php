@@ -47,7 +47,6 @@
                                             'pageLength'=>10,
                                         ]"
                                   striped hoverable bordered>
-                {{-- Placeholder rows if you want static fallback --}}
             </x-adminlte-datatable>
         </div>
     </div>

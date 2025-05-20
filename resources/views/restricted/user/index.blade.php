@@ -27,7 +27,7 @@
                                     'Name', 
                                     'Email', 
                                     'Role', 
-                                    'Employee Name', 
+                                    'Employee', 
                                     ['label'=>'Actions','no-export'=>true, 'width'=>10,]
                                     ]"
                                 :config="[ 'processing' => true, 'serverSide' => true, 'ajax' => route('user.data'),
@@ -43,7 +43,6 @@
                                             'pageLength'=>10,
                                         ]"
                                   striped hoverable bordered>
-                {{-- Placeholder rows if you want static fallback --}}
             </x-adminlte-datatable>
         </div>
     </div>

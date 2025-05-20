@@ -16,7 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('restricted/employee/index');
+        return view('restricted.employee.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class EmployeeController extends Controller
      */
     public function data()
     {
-        // Yajra DataTables taking data from DeptModel, which uses data from dept table
+        // Yajra DataTables taking data from EmployeeModel, which uses data from dept table
         return DataTables::of(EmployeeModel::with('department')) // more advanced, EmployeeModel::with('department') queries all entries at once and grabs their related departments
         ->addColumn('actions', function ($item) { // adds extra column to contain action
             return view('partials.actions', [ // partial modular file, taking the item id and routes each should go to

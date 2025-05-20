@@ -43,4 +43,9 @@ class EmployeeModel extends Model
     {
         return $this->hasOne(User::class, 'id_employee');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(AttendanceModel::class, 'id_employee');
+    }
 }

@@ -322,7 +322,7 @@ return [
         ],
         [
             'text' => 'Attendance',
-            // 'route' => 'attendance.index',
+            'route' => 'attendance.index',
             'icon' => 'fas fa-fw fa-calendar-check',
             'active' => ['attendance*'],
         ],

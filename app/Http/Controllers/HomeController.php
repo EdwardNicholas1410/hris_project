@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // take user account, so can take employee
+        $user = Auth::user();
+        $employee = $user->employee;
+
+        // default variable values
+        $lastAttendance = null;
+        $checkedIn = false;
+
+        if ($employee) {
+            $lastAttendance = $employee->attendances()->latest('check_in')->first();
+            $checkedIn = $lastAttendance && $lastAttendance->check_out === null;
+        }
+
+        return view('home', compact('lastAttendance', 'checkedIn'));
     }
 }

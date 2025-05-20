@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function data()
     {
-        // Yajra DataTables taking data from DeptModel, which uses data from dept table
+        // Yajra DataTables taking data from User (Model), which uses data from dept table
         return DataTables::of(
             User::select(['id', 'name', 'email', 'role', 'id_employee'])->with('employee')
             ) // more advanced, instead of taking all, it only takes the specific columns and the method

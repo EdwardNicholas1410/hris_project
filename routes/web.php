@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserController;
@@ -27,7 +28,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // dept
-Route::prefix('dept')->name('dept.')->group(function () {
+Route::prefix('dept')->name('dept.')->middleware('auth')->group(function () {
     Route::get('/', [DeptController::class, 'index'])->name('index');
     Route::get('/data', [DeptController::class, 'data'])->name('data');
     Route::get('/create', [DeptController::class, 'create'])->name('create');
@@ -38,7 +39,7 @@ Route::prefix('dept')->name('dept.')->group(function () {
 });
 
 // employee
-Route::prefix('employee')->name('employee.')->group(function () {
+Route::prefix('employee')->name('employee.')->middleware('auth')->group(function () {
     Route::get('/', [EmployeeController::class, 'index'])->name('index');
     Route::get('/data', [EmployeeController::class, 'data'])->name('data');
     Route::get('/create', [EmployeeController::class, 'create'])->name('create');
@@ -49,7 +50,7 @@ Route::prefix('employee')->name('employee.')->group(function () {
 });
 
 // user
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/data', [UserController::class, 'data'])->name('data');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -57,4 +58,17 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [UserController::class, 'update'])->name('update');
     Route::delete('/{id}/destroy', [UserController::class, 'destroy'])->name('destroy');
+});
+
+// attendance
+Route::prefix('attendance')->name('attendance.')->middleware('auth')->group(function () {
+    Route::get('/', [AttendanceController::class, 'index'])->name('index');
+    Route::get('/data', [AttendanceController::class, 'data'])->name('data');
+    Route::get('/create', [AttendanceController::class, 'create'])->name('create');
+    Route::post('/store', [AttendanceController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [AttendanceController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [AttendanceController::class, 'update'])->name('update');
+    Route::delete('/{id}/destroy', action: [AttendanceController::class, 'destroy'])->name('destroy');
+    Route::post('/check-in', [AttendanceController::class, 'checkIn'])->name('check-in');
+    Route::post('/check-out', [AttendanceController::class, 'checkOut'])->name('check-out');
 });

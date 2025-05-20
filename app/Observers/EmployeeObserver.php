@@ -45,6 +45,8 @@ class EmployeeObserver
         if ($employeeModel->user) {
             $employeeModel->user->delete();
         }
+
+        $employeeModel->attendances()->delete(); // delete all the attendance records in their name
     }
 
     /**
@@ -55,6 +57,8 @@ class EmployeeObserver
         if ($employeeModel->user()->withTrashed()->exists()) {
             $employeeModel->user()->withTrashed()->restore();
         }
+
+        $employeeModel->attendances()->withTrashed()->restore();
     }
 
     /**
