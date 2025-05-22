@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DeptController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,4 +72,17 @@ Route::prefix('attendance')->name('attendance.')->middleware('auth')->group(func
     Route::delete('/{id}/destroy', action: [AttendanceController::class, 'destroy'])->name('destroy');
     Route::post('/check-in', [AttendanceController::class, 'checkIn'])->name('check-in');
     Route::post('/check-out', [AttendanceController::class, 'checkOut'])->name('check-out');
+});
+
+// leave request
+Route::prefix('leave_request')->name('leave_request.')->group(function () {
+    Route::get('/', [LeaveRequestController::class, 'index'])->name('index');
+    Route::get('/data', [LeaveRequestController::class, 'data'])->name('data');
+    Route::get('/create', [LeaveRequestController::class, 'create'])->name('create');
+    Route::post('/store', [LeaveRequestController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [LeaveRequestController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [LeaveRequestController::class, 'update'])->name('update');
+    Route::put('/{id}/status', [LeaveRequestController::class, 'updateStatus'])->name('updateStatus');
+    Route::delete('/{id}/destroy', [LeaveRequestController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}', [LeaveRequestController::class, 'show'])->name('show');
 });

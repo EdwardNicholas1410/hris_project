@@ -48,4 +48,9 @@ class EmployeeModel extends Model
     {
         return $this->hasMany(AttendanceModel::class, 'id_employee');
     }
+
+    public function leaverequests()
+    {
+        return $this->hasMany(AttendanceModel::class, 'id_employee');
+    }
 }

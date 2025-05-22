@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendance', function (Blueprint $table) {
+        Schema::create('leaverequest', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_employee')->constrained('employee');
-            $table->dateTime('check_in');
-            $table->dateTime('check_out')->nullable();
+            $table->enum('jenis_cuti', ['sakit', 'izin', 'dibayar']);
+            $table->date('tanggal_cuti');
+            $table->date('tanggal_kembali');
+            $table->enum('status_request', ['accepted', 'rejected', 'pending'])->default('pending');
+            $table->enum('pembuat_request', ['employee', 'HR', 'admin'])->default('employee');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendance');
+        Schema::dropIfExists('leaverequest');
     }
 };

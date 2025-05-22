@@ -9,8 +9,6 @@ use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\EmployeeModel;
-
 class AttendanceController extends Controller
 {
     /**
@@ -27,7 +25,7 @@ class AttendanceController extends Controller
     public function data()
     {
         // Yajra DataTables taking data from AttendanceModel, which uses data from dept table
-        return DataTables::of(AttendanceModel::with('employee')) // more advanced, EmployeeModel::with('department') queries all entries at once and grabs their related departments
+        return DataTables::of(AttendanceModel::with('employee')) // more advanced, AttendanceModel::with('employee') queries all entries at once and grabs their related employee
         ->addColumn('actions', function ($item) { // adds extra column to contain action
             return view('partials.actions', [ // partial modular file, taking the item id and routes each should go to
                 'item' => $item,
@@ -71,14 +69,12 @@ class AttendanceController extends Controller
             'check_out' => 'nullable|date',
         ]);
 
-        // parse with Carbon
-        $checkIn = Carbon::parse($validateData['check_in']);
         // parse with Carbon if available, if not then null
         $checkOut = $validateData['check_out'] ? Carbon::parse($validateData['check_out']) : null;
 
         AttendanceModel::create([
             'id_employee' => $validateData['id_employee'],
-            'check_in' => $checkIn,
+            'check_in' => Carbon::parse($validateData['check_in']), // parse with Carbon, should always be available
             'check_out' => $checkOut,
         ]);
         

@@ -46,7 +46,7 @@
                 <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-control" name="role" required>
-                        <option value="">-- Select Role --</option>
+                        <option value="">-- Pilih Role --</option>
                         <option value="employee" {{ (old('role', $edit->role)) == 'employee' ? 'selected' : '' }}>Employee</option>
                         <option value="HR" {{ old('role', $edit->role) == 'HR' ? 'selected' : '' }}>HR</option>
                         <option value="admin" {{ old('role', $edit->role) == 'admin' ? 'selected' : '' }}>Admin</option>

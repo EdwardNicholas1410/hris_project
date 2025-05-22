@@ -328,38 +328,15 @@ return [
         ],
         [
             'text' => 'Leave Request',
-            // 'route' => 'leave_request.index',
+            'route' => 'leave_request.index',
             'icon' => 'fas fa-fw fa-calendar-minus',
             'active' => ['leave_request*'],
         ],
-        [
-            'text' => 'Payroll',
-            // 'route' => 'payroll.index',
-            'icon' => 'fas fa-money-check-alt',
-            'active' => ['payroll*'],
-        ],
         // [
-        //     'text' => 'blog',
-        //     'url' => 'admin/blog',
-        //     'can' => 'manage-blog',
-        // ],
-        // [
-        //     'text' => 'pages',
-        //     'url' => 'home',
-        //     'icon' => 'far fa-fw fa-file',
-        //     'label' => 4,
-        //     'label_color' => 'success',
-        // ],
-        // ['header' => 'account_settings'],
-        // [
-        //     'text' => 'profile',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
-        // [
-        //     'text' => 'change_password',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
+        //     'text' => 'Payroll',
+        //     'route' => 'payroll.index',
+        //     'icon' => 'fas fa-money-check-alt',
+        //     'active' => ['payroll*'],
         // ],
         [
             'text' => 'Restricted',
