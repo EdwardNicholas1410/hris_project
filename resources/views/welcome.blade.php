@@ -1,5 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #f3f4f6, #d1d5db);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 32rem;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .icon {
+      background: #e5e7eb;
+      border-radius: 9999px;
+      padding: 1rem;
+      display: inline-block;
+    }
+    .icon svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #4b5563;
+    }
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 1rem 0 0.5rem;
+    }
+    p {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">
+      <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.875A4.125 4.125 0 0012.375 3.75v0a4.125 4.125 0 00-4.125 4.125V10.5M5.25 10.5h13.5m-1.125 0v6.375a1.125 1.125 0 01-1.125 1.125H7.5a1.125 1.125 0 01-1.125-1.125V10.5h11.25z" />
+      </svg>
+    </div>
+    <h1>Aplikasi Internal X</h1>
+    <p>Aplikasi ini khusus pegawai perusahaan X, tolong log in atau sign up menggunakan akun perusahaan. Untuk membuat akun, dibutuhkan id pegawai yang dicantumkan bersama email penerimaan pekerjaan.</p>
+    <a href="{{ route('login') }}"" class="btn">Log In</a>
+    <a href="{{ route('register') }}"class="btn">Sign Up</a>
+  </div>
+</body>
+</html>
+
+{{-- old ass home page, need to replace --}}
+{{-- current one is temp, remember to inform group members to make new one --}}
+{{-- theme: company internal app --}}
+
+{{-- <!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -533,4 +618,4 @@
 
 </body>
 
-</html>
+</html> --}}

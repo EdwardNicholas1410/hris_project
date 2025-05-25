@@ -12,11 +12,13 @@
 
 @section('content')
 <div class="container-fluid">
+    @role('HR|admin')
     <div class="mt-2">
         <a href="{{ route('attendance.create') }}" class="btn btn-info mb-3">
             <i class="fas fa-plus"></i> New Entry
         </a>
     </div>
+    @endrole
     <div class="card">
         <div class="card-body">
             {{-- Use AdminLTE datatable component --}}

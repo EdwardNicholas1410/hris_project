@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\DeptModel;
+use App\Models\LeaveRequestModel;
+
+
 class HomeController extends Controller
 {
     /**
@@ -38,6 +42,27 @@ class HomeController extends Controller
             $checkedIn = $lastAttendance && $lastAttendance->check_out === null;
         }
 
-        return view('home', compact('lastAttendance', 'checkedIn'));
+        // data initialize
+        $deptChartData = null;
+        $leaveChartData = null;
+
+        // for admins display dept
+        if ($user->hasRole('admin')) {
+            $deptChartData = DeptModel::select('nama', 'count')->get();
+        }
+
+        // for hr display leave requests
+        if ($user->hasRole('HR')) {
+            $leaveChartData = LeaveRequestModel::selectRaw('status_request, COUNT(*) as total')
+                ->groupBy('status_request')
+                ->get();
+        }
+
+        return view('home', compact(
+            'lastAttendance',
+            'checkedIn',
+            'deptChartData',
+            'leaveChartData'
+        ));
     }
 }

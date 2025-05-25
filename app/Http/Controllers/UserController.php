@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -68,13 +69,15 @@ class UserController extends Controller
             'id_employee' => 'required|exists:employee,id|unique:users,id_employee',
         ]);
 
-        User::create(attributes: [
+        $user = User::create(attributes: [
             'name' => $validateData['name'],
             'email' => $validateData['email'],
             'password' => Hash::make($validateData['password']),
-            'role' => $validateData['role'],
+            'role' => $validateData['role'], // visual only
             'id_employee' => $validateData['id_employee'],
         ]);
+
+        $user->assignRole($validateData['role']); // actual spatie role
         
         return redirect()->route('user.index')->with('success', 'User telah dibuat');
     }
@@ -106,13 +109,29 @@ class UserController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
-            'password' => 'required|string|min:8|max:255',
+            'password' => 'nullable|string|min:8|max:255',
             'role' => 'required|in:employee,HR,admin',
-            'id_employee' => 'required|exists:employee,id|unique:users,id_employee',
+            'id_employee' => [
+                'required',
+                'exists:employee,id',
+                Rule::unique('users', 'id_employee')->ignore($id), // custom rule so it ignores current id
+            ],
         ]);
 
-        $item = User::findOrFail($id);
-        $item->update($validateData);
+        $user = User::findOrFail($id);
+
+        // in this form because of the password thing
+        $user->name = $validateData['name'];
+        $user->email = $validateData['email'];
+        // this bastard needs hashing
+        if (!empty($validateData['password'])) {
+            $user->password = Hash::make($validateData['password']);
+        }
+        $user->id_employee = $validateData['id_employee'];
+        $user->role = $validateData['role']; // for display
+        $user->save();
+
+        $user->syncRoles([$validateData['role']]); // actual spatie role
 
         return redirect()->route('user.index')->with('success', 'User telah diubah');
     }

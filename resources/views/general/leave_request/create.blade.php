@@ -22,10 +22,15 @@
             <form method="POST" action="{{ route('leave_request.store') }}">
                 @csrf
 
-                <div class="mb-3">
-                    <label for="id_employee" class="form-label">Employee ID</label>
-                    <input type="text" class="form-control" name="id_employee" value="{{ old('id_employee') }}">
-                </div>
+                @role('HR|admin')
+                    <div class="mb-3">
+                        <label for="id_employee" class="form-label">Employee ID</label>
+                        <input type="text" class="form-control" name="id_employee" value="{{ old('id_employee', $edit->id_employee ?? '') }}">
+                    </div>
+                @else
+                    <input type="hidden" name="id_employee" value="{{ auth()->user()->id_employee }}">
+                    <input type="hidden" name="status_request" value="pending">
+                @endrole
 
                 <div class="mb-3">
                     <label for="jenis_cuti" class="form-label">Jenis Cuti</label>
@@ -47,6 +52,7 @@
                     <input type="date" class="form-control" name="tanggal_kembali" value="{{ old('tanggal_kembali') }}">
                 </div>
 
+                @role('HR|admin')
                 <div class="mb-3">
                     <label for="status_request" class="form-label">Status Request</label>
                     <select name="status_request" class="form-control">
@@ -55,6 +61,7 @@
                         <option value="rejected" {{ old('status_request') == 'rejected' ? 'selected' : '' }}>Rejected</option>
                     </select>
                 </div>
+                @endrole
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>   

@@ -24,9 +24,25 @@ class AttendanceController extends Controller
      */
     public function data()
     {
-        // Yajra DataTables taking data from AttendanceModel, which uses data from dept table
-        return DataTables::of(AttendanceModel::with('employee')) // more advanced, AttendanceModel::with('employee') queries all entries at once and grabs their related employee
-        ->addColumn('actions', function ($item) { // adds extra column to contain action
+        // grab current user
+        $user = auth()->user();
+
+        // custom query
+        $query = AttendanceModel::with('employee');
+
+        // restrict to only their own entries if employee
+        if ($user->hasRole('employee')) {
+            $query->where('id_employee', $user->id_employee);
+        }
+
+        // Yajra DataTables taking data from AttendanceModel, which uses data from employee table
+        return DataTables::of($query) // more advanced, AttendanceModel::with('employee') queries all entries at once and grabs their related employee
+        ->addColumn('actions', function ($item) use ($user) { // adds extra column to contain action
+            // make column blank if employee
+            if ($user->hasRole('employee')){
+                return '';
+            }
+
             return view('partials.actions', [ // partial modular file, taking the item id and routes each should go to
                 'item' => $item,
                 'routes' => [
@@ -36,7 +52,7 @@ class AttendanceController extends Controller
             ])->render();
         })
         // edits a column so that 
-        ->editColumn('id_dept', function ($item) {
+        ->editColumn('id_employee', function ($item) {
             return $item->employee ? $item->employee->nama_lengkap : '-'; // replace id with name
         })
         // new parts! these are just to reformat the date time

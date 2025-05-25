@@ -37,7 +37,7 @@
 
                 <dt class="col-sm-3">Status</dt>
                 <dd class="col-sm-9">
-                    {{-- @if($canEditStatus) --}}
+                    @role('HR|admin')
                         <form method="POST" action="{{ route('leave_request.updateStatus', $item->id) }}">
                             @csrf
                             @method('PUT')
@@ -50,9 +50,9 @@
                                 <button class="btn btn-success" type="submit">Save</button>
                             </div>
                         </form>
-                    {{-- @else
+                    @else
                         {{ ucfirst($item->status_request) }}
-                    @endif --}}
+                    @endif
                 </dd>
             </dl>
 

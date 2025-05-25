@@ -325,86 +325,49 @@ return [
             'route' => 'attendance.index',
             'icon' => 'fas fa-fw fa-calendar-check',
             'active' => ['attendance*'],
+            'can' => 'attendance.index',
         ],
         [
             'text' => 'Leave Request',
             'route' => 'leave_request.index',
             'icon' => 'fas fa-fw fa-calendar-minus',
             'active' => ['leave_request*'],
+            'can' => 'leave_request.index',
         ],
-        // [
-        //     'text' => 'Payroll',
-        //     'route' => 'payroll.index',
-        //     'icon' => 'fas fa-money-check-alt',
-        //     'active' => ['payroll*'],
-        // ],
         [
             'text' => 'Restricted',
             'icon' => 'fas fa-fw fa-lock',
+            'can' => function () {
+                $user = auth()->user();
+                return $user && (
+                    $user->can('dept.index') ||
+                    $user->can('employee.index') ||
+                    $user->can('user.index')
+                );
+            },
             'submenu' => [
                 [
                     'text' => 'Department',
                     'route' => 'dept.index',
                     'icon' => 'fas fa-fw fa-sitemap',
                     'active' => ['dept*'],
+                    'can' => 'dept.index',
                 ],
                 [
                     'text' => 'Employee',
                     'route' => 'employee.index',
                     'icon' => 'fas fa-fw fa-id-card',
                     'active' => ['employee*'],
+                    'can' => 'employee.index',
                 ],
                 [
                     'text' => 'User',
                     'route' => 'user.index',
                     'icon' => 'fas fa-fw fa-users',
                     'active' => ['user*'],
+                    'can' => 'user.index',
                 ],
-                // [
-                //     'text' => 'level_one',
-                //     'url' => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url' => '#',
-                //         ],
-                //         [
-                //             'text' => 'level_two',
-                //             'url' => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url' => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url' => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
-                // [
-                //     'text' => 'level_one',
-                //     'url' => '#',
-                // ],
             ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
         ],
     ],
 
