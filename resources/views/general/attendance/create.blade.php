@@ -23,8 +23,16 @@
                 @csrf
 
                 <div class="mb-3">
-                  <label for="id_employee" class="form-label">ID Employee</label>
-                  <input type="text" class="form-control" name="id_employee" value="{{ old('id_employee') }}">
+                    <label for="id_employee" class="form-label">Employee</label>
+                    <select name="id_employee" class="form-control">
+                        <option value="">-- Pilih Karyawan --</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}" 
+                                {{ old('id_employee', $edit->id_employee ?? '') == $employee->id ? 'selected' : '' }}>
+                                {{ $employee->nama_lengkap }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 
                 <div class="mb-3">

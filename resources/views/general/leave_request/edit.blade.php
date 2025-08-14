@@ -24,8 +24,16 @@
                 @method('PUT')
                 @role('HR|admin')
                     <div class="mb-3">
-                        <label for="id_employee" class="form-label">Employee ID</label>
-                        <input type="text" class="form-control" name="id_employee" value="{{ old('id_employee', $edit->id_employee ?? '') }}">
+                        <label for="id_employee" class="form-label">Employee</label>
+                        <select name="id_employee" class="form-control">
+                            <option value="">-- Pilih Karyawan --</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->id }}" 
+                                    {{ old('id_employee', $edit->id_employee ?? '') == $employee->id ? 'selected' : '' }}>
+                                    {{ $employee->nama_lengkap }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 @else
                     <input type="hidden" name="id_employee" value="{{ auth()->user()->id_employee }}">
@@ -44,12 +52,12 @@
 
                 <div class="mb-3">
                     <label for="tanggal_cuti" class="form-label">Tanggal Cuti</label>
-                    <input type="date" class="form-control" name="tanggal_cuti" value="{{ old('tanggal_cuti', $edit->tanggal_cuti) }}">
+                    <input type="date" class="form-control" name="tanggal_cuti" value="{{ old('tanggal_cuti', $edit->tanggal_cuti)->format('Y-m-d') }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
-                    <input type="date" class="form-control" name="tanggal_kembali" value="{{ old('tanggal_kembali', $edit->tanggal_kembali) }}">
+                    <input type="date" class="form-control" name="tanggal_kembali" value="{{ old('tanggal_kembali', $edit->tanggal_kembali)->format('Y-m-d') }}">
                 </div>
 
                 @role('HR|admin')

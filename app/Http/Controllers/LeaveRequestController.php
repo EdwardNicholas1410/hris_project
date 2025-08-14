@@ -8,6 +8,8 @@ use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\EmployeeModel;
+
 class LeaveRequestController extends Controller
 {
     /**
@@ -62,7 +64,9 @@ class LeaveRequestController extends Controller
      */
     public function create()
     {
-        return view('general.leave_request.create');
+        $employees = EmployeeModel::forDropdown()->get();
+        
+        return view('general.leave_request.create', compact('employees'));
     }
 
     /**
@@ -132,13 +136,15 @@ class LeaveRequestController extends Controller
         $edit = LeaveRequestModel::findOrFail($id);
 
         $user = auth()->user();
+
+        $employees = EmployeeModel::forDropdown()->get();
         
         // check if id_employee matches and if user is mere employee
         if ($user->hasRole('employee') && $user->id_employee !== $edit->id_employee) {
             abort(403);
         }
 
-        return view('general.leave_request.edit', compact('edit'));
+        return view('general.leave_request.edit', compact('edit', 'employees'));
     }
 
     /**

@@ -9,6 +9,8 @@ use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\EmployeeModel;
+
 class AttendanceController extends Controller
 {
     /**
@@ -71,7 +73,9 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        return view('general.attendance.create');
+        $employees = EmployeeModel::forDropdown()->get();
+
+        return view('general.attendance.create', compact('employees'));
     }
 
     /**
@@ -112,7 +116,9 @@ class AttendanceController extends Controller
     {
         $edit = AttendanceModel::findOrFail($id);
 
-        return view('general.attendance.edit', compact('edit'));
+        $employees = EmployeeModel::forDropdown()->get();
+
+        return view('general.attendance.edit', compact('edit', 'employees'));
     }
 
     /**

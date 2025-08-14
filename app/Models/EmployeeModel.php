@@ -53,4 +53,9 @@ class EmployeeModel extends Model
     {
         return $this->hasMany(AttendanceModel::class, 'id_employee');
     }
+
+    public function scopeForDropdown($query)
+    {
+        return $query->select('id', 'nama_lengkap');
+    }
 }
